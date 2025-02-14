@@ -20,7 +20,7 @@ app.http('paymentIntent', {
             },
         });
 
-        return {clientSecret: paymentIntent.client_secret};
+        return {clientSecret: await paymentIntent.client_secret};
     }
 });
 
