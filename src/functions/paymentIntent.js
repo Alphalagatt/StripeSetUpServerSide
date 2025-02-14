@@ -1,10 +1,10 @@
 const { app } = require('@azure/functions');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-app.setup({ enableHttpStream: true });
+//app.setup({ enableHttpStream: true });
 
 app.http('paymentIntent', {
-    methods: ['GET', 'POST'],
+    methods: ['POST'],
     authLevel: 'anonymous',
     handler: async (request, context) => {
         context.log(`Http function processed request for url "${request.url}"`);
