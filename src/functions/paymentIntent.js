@@ -6,6 +6,9 @@ app.setup({ enableHttpStream: true });
 app.http('paymentIntent', {
     methods: ['GET','POST'],
     authLevel: 'anonymous',
+    headers: {
+        "Access-Control-Allow-Origin": "*",  // Allow all origins (or specify your domain)
+    },
     handler: async (request, context) => {
         context.log(`Http function processed request for url "${request.url}"`);
         
@@ -22,8 +25,9 @@ app.http('paymentIntent', {
         });
 
         context.log(paymentIntentVal.client_secret);
-
-        return {clientSecret: paymentIntentVal.client_secret};
+        const clientSecret = await paymentIntentVal.client_secret;
+        return {clientSecret: clientSecret};
+        
     }
 });
 
