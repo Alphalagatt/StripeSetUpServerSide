@@ -9,7 +9,7 @@ app.http('paymentIntent', {
     handler: async (request, context) => {
         context.log(`Http function processed request for url "${request.url}"`);
         
-        console.log(process.env.STRIPE_SECRET_KEY);
+        context.log(process.env.STRIPE_SECRET_KEY);
 
         //const {items} = request.body;
         
@@ -21,7 +21,7 @@ app.http('paymentIntent', {
             },
         });
 
-        console.log(paymentIntentVal);
+        context.log(paymentIntentVal);
 
         return {clientSecret: "await paymentIntent.client_secret"};
     }
