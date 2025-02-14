@@ -1,7 +1,7 @@
 const { app } = require('@azure/functions');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-//app.setup({ enableHttpStream: true });
+app.setup({ enableHttpStream: true });
 
 app.http('paymentIntent', {
     methods: ['GET','POST'],
@@ -21,9 +21,9 @@ app.http('paymentIntent', {
             },
         });
 
-        context.log(paymentIntentVal);
+        context.log(paymentIntentVal.client_secret);
 
-        return {clientSecret: "await paymentIntent.client_secret"};
+        return {clientSecret: paymentIntentVal.client_secret};
     }
 });
 
