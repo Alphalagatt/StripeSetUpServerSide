@@ -26,7 +26,8 @@ app.http('paymentIntent', {
 
         context.log(paymentIntentVal.client_secret);
         const clientSecret = await paymentIntentVal.client_secret;
-        return {clientSecret: clientSecret};
+        return "Hello World";
+        //return {clientSecret: clientSecret};
         
     }
 });
