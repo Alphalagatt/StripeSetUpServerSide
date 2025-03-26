@@ -14,14 +14,39 @@ app.http('paymentIntent', {
 
         context.log(process.env.STRIPE_SECRET_KEY);
 
-        //const {items} = request.body;
+        //const {items} = 
+        // Retrieve the amount, invoice number, and description from the request body
+        const { amount, invoiceNumber, invoiceDescription } = request.body;
+
+        if (!amount || isNaN(amount)) {
+            context.res = {
+                status: 400,
+                body: "Amount is required and should be a valid number"
+            };
+            return;
+        }
+
+        if (!invoiceNumber || !invoiceDescription) {
+            context.res = {
+                status: 400,
+                body: "Invoice number and description are required"
+            };
+            return;
+        }
+
+
+        // Create a PaymentIntent with the specified amount, currency, and metadata
 
         const paymentIntentVal = await stripe.paymentIntents.create({
-            amount: 1000,
+            amount: amount * 100,
             currency: 'aud',
             automatic_payment_methods: {
                 enabled: true,
             },
+            metadata: {
+                invoiceNumber: invoiceNumber,
+                invoiceDescription: invoiceDescription
+            }
         });
 
         context.log(paymentIntentVal.client_secret);
