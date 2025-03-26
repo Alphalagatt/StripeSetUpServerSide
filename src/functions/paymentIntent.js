@@ -13,6 +13,8 @@ app.http('paymentIntent', {
         context.log(`Http function processed request for url "${request.url}"`);
 
         context.log(process.env.STRIPE_SECRET_KEY);
+        console.log("request: ",request.body);
+        console.log("context: ",context);
 
         //const {items} = 
         // Retrieve the amount, invoice number, and description from the request body
