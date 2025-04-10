@@ -9,6 +9,29 @@ const paymentIntent = require('./functions/paymentIntent');
 app.http('paymentIntent', {
     methods: ['POST'],
     authLevel: 'anonymous',
-    handler: paymentIntent,
+    handler: async (req, res) => {
+        try {
+            const response = await paymentIntent(req, res);
+            return {
+                status: response.status,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    message: response.body.message,
+                    amount: response.body.amount,
+                    paymentIntent: response.body.paymentIntent,
+                }),
+            }; 
+        } catch (error) {
+            console.error("Error creating PaymentIntent: ", error);
+            // Log the error details
+            return {
+                status: 500,
+                body: JSON.stringify({
+                    error: "Internal Server Error",
+                    message: error.message,
+                }),
+            };
+        }
+    },
 });
 
