@@ -9,6 +9,11 @@ async function createPaymentIntentCheckout(req, res) {
     const amount = req.params.amount;
     const invoiceNumber = req.params.invoiceNumber;
     const invoiceDescription = req.params.invoiceDescription;
+    const propertyAddress = req.params.propertyAddress;
+    const ListingAgentName = req.params.ListingAgentName;
+    const ListingAgencyName = req.params.ListingAgencyName;
+    const PriceList = req.params.PriceList;
+    const ProductName = req.params.ProductName;
     const YOUR_DOMAIN = req.params.YOUR_DOMAIN;
 
     //res.log("Amount: ", amount);
@@ -23,7 +28,15 @@ async function createPaymentIntentCheckout(req, res) {
                     unit_amount: amount*100, // amount in cents (i.e. $20.00)
                     product_data: {
                         name: invoiceNumber,
-                        description: invoiceDescription
+                        description: invoiceDescription,
+                        images: [`${YOUR_DOMAIN}/85ee3b2e0185ad21d8b3ea25eab38695.png`],
+                        metadata: {
+                            propertyAddress: propertyAddress,
+                            ListingAgentName: ListingAgentName,
+                            ListingAgencyName: ListingAgencyName,
+                            PriceList: PriceList,
+                            ProductName: ProductName,
+                        }
                     }
                 },
                 quantity: 1
