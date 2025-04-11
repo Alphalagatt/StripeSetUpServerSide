@@ -28,7 +28,13 @@ async function createPaymentIntentCheckout(req, res) {
                     unit_amount: amount*100, // amount in cents (i.e. $20.00)
                     product_data: {
                         name: invoiceNumber,
-                        description: invoiceDescription,
+                        description: `
+                            propertyAddress: ${propertyAddress}\n
+                            ListingAgentName: ${ListingAgentName}\n
+                            ListingAgencyName: ${ListingAgencyName}\n
+                            PriceList: ${PriceList}\n,
+                            ProductName: ${ProductName}\n,
+                        `,
                         images: [`${YOUR_DOMAIN}/85ee3b2e0185ad21d8b3ea25eab38695.png`],
                         metadata: {
                             propertyAddress: propertyAddress,
