@@ -19,11 +19,11 @@ async function createPaymentIntentCheckout(req, res) {
         line_items: [
             {
                 price_data: {
-                    currency: 'usd',
-                    unit_amount: 2000, // amount in cents (i.e. $20.00)
+                    currency: 'aud',
+                    unit_amount: amount*100, // amount in cents (i.e. $20.00)
                     product_data: {
-                        name: 'Custom T-shirt',
-                        description: 'High quality cotton tee'
+                        name: invoiceNumber,
+                        description: invoiceDescription
                     }
                 },
                 quantity: 1
@@ -31,6 +31,8 @@ async function createPaymentIntentCheckout(req, res) {
         ],
         mode: 'payment',
         return_url: `${YOUR_DOMAIN}/return.html?session_id={CHECKOUT_SESSION_ID}`,
+        //success_url: `${YOUR_DOMAIN}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+        //cancel_url: `${YOUR_DOMAIN}/cancel.html?session_id={CHECKOUT_SESSION_ID}`,
     });
 
     res.log("PaymentIntent created. Session ID: ", paymentIntent);
@@ -42,7 +44,9 @@ async function createPaymentIntentCheckout(req, res) {
         body: {
             message: "checkout session created successfully",
             amount: amount,
-            paymentIntent: paymentIntent.client_secret,
+            paymentIntent: paymentIntent,
+        
+            //url: paymentIntent.url,
         }
     };
 
