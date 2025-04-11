@@ -50,7 +50,7 @@ async function createPaymentIntentCheckout(req, res) {
             }
         ],
         mode: 'payment',
-        return_url: `${YOUR_DOMAIN}/return.html?session_id={CHECKOUT_SESSION_ID}`,
+        return_url: `${YOUR_DOMAIN}Payment-Successful?session_id={CHECKOUT_SESSION_ID}`,
         //success_url: `${YOUR_DOMAIN}/success.html?session_id={CHECKOUT_SESSION_ID}`,
         //cancel_url: `${YOUR_DOMAIN}/cancel.html?session_id={CHECKOUT_SESSION_ID}`,
     });
