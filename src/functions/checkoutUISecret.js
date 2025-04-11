@@ -36,7 +36,7 @@ async function createPaymentIntentCheckout(req, res) {
                             PriceList: ${PriceList}\n,
                             ProductName: ${ProductName}\n,
                         `,
-                        images: [`${YOUR_DOMAIN}/85ee3b2e0185ad21d8b3ea25eab38695.png`],
+                        images: [`https://icon2.cleanpng.com/20180427/cye/kisspng-computer-icons-investment-investor-clip-art-intermediary-5ae341eba78030.8997880415248429876861.jpg`],
                         metadata: {
                             propertyAddress: propertyAddress,
                             ListingAgentName: ListingAgentName,
